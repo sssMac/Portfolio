@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="elmah.io" Version="4.1.29" />
+    <PackageReference Include="Elmah.Io.Extensions.Logging" Version="4.1.28" />
+  </ItemGroup>
+
 </Project>
