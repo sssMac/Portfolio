@@ -1,32 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portfolio.Models;
 using System.Diagnostics;
+using Portfolio.Misc.Services.EmailService;
 
 namespace Portfolio.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IEmailService _emailService;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
-        }
+            var rng = new Random();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            var message = new Message(new string[] { "ilya-lyapin@mail.ru" }, "Test email", "This is the content from our email.");
+            _emailService.SendEmail(message);
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+           return View();
         }
     }
 }

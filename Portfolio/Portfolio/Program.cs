@@ -1,10 +1,19 @@
+using Portfolio.Misc.Services.EmailService;
 using Portfolio.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var collection = new ServiceCollection();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+collection.AddScoped<IEmailService, EmailService>();
+
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
+
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,6 +30,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
+
 
 app.UseAuthorization();
 
