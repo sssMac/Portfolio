@@ -20,6 +20,7 @@
             finally
             {
                 _logger.LogInformation(
+                    "\n" +
                     ">>> Method: {method} \n" +
                     ">>> Headers: {headers} \n" +
                     ">>> Body: {body} \n" +

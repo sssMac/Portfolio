@@ -385,3 +385,54 @@ a#home_btn {
 .glyphicon-cog::before {
 	content :counter(name); 
 }
+
+.mail_us {
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+.mail_right {
+	background: #FDFFFE;
+	padding: 2em;
+	margin : auto;
+	float: none !important;
+}
+
+.contact-grid1-left {
+	width: 100%;
+}
+
+.contact-grid1-left1 span {
+	font-size: 1.5em;
+	color: #00a78e;
+}
+
+.footer {
+	min-height: 650px;
+	padding: 4em 0 0em 0;
+	background: url(../img/contact.jpeg) no-repeat center top;
+	background-size: cover;
+}
+
+.mail_right input[type="text"], .mail_right input[type="email"], .mail_right textarea {
+	background: none;
+	width: 100%;
+	color: #777;
+	padding: 19px 10px;
+	margin-bottom: 24px;
+	outline: none;
+	border: 2px solid #00a78e;
+}
+
+.mail_right textarea {
+	height: 200px;
+	resize: none;
+}
+.mail_right input[type="submit"] {
+	border: none;
+	outline: none;
+	color: #fff;
+	background: #212322;
+	font-size: 16px;
+	padding: 13px 40px;
+}

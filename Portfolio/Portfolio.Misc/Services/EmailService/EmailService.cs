@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using MimeKit;
+﻿using MimeKit;
+using MailKit.Net.Smtp;
+
 
 namespace Portfolio.Misc.Services.EmailService
 {
@@ -13,10 +11,10 @@ namespace Portfolio.Misc.Services.EmailService
         {
             _emailConfig = emailConfig;
         }
-        public void SendEmail(Message message)
+        public async Task SendEmailAsync(Message message)
         {
             var emailMessage = CreateEmailMessage(message);
-            Send(emailMessage);
+            await SendAsync(emailMessage);
         }
 
         private MimeMessage CreateEmailMessage(Message message)
@@ -30,26 +28,25 @@ namespace Portfolio.Misc.Services.EmailService
             return emailMessage;
         }
 
-        private void Send(MimeMessage mailMessage)
+        private async Task SendAsync(MimeMessage mailMessage)
         {
             using (var client = new SmtpClient())
             {
                 try
                 {
-                    client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
-
-                    client.Send(mailMessage);
+                    await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+                    await client.SendAsync(mailMessage);
                 }
                 catch
                 {
-                    //log an error message or throw an exception or both.
+                    //log an error message or throw an exception, or both.
                     throw;
                 }
                 finally
                 {
-                    client.Disconnect(true);
+                    await client.DisconnectAsync(true);
                     client.Dispose();
                 }
             }
