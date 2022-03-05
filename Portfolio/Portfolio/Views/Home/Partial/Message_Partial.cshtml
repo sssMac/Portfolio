@@ -1,0 +1,7 @@
+﻿@model Portfolio.Models.MessageViewModel
+
+<form enctype="" asp-controller="Home" asp-action="SendMessage" method="post">
+    <input placeholder="Email" asp-for="Email" required="">
+    <textarea placeholder="Message..." asp-for="Message" required=""></textarea>
+    <input type="submit" value="Send">
+</form>
